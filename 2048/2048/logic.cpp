@@ -11,12 +11,7 @@ int** creation() {
 
     game_field = generateCell(game_field); 
     game_field = generateCell(game_field);
-    game_field = generateCell(game_field);
-    game_field = generateCell(game_field);
-    game_field = generateCell(game_field);
-    game_field = generateCell(game_field);
-    game_field = generateCell(game_field);
-    game_field = generateCell(game_field);
+
 
     return game_field;
 }
@@ -28,6 +23,7 @@ void printField(int** game_field) {
         }
         std::cout << "\n";
     }
+    std::cout << "\n";
 }
 
 int* shiftRorL(int* game_field_stroka, int dir) {
@@ -108,13 +104,38 @@ int* mergeRorL(int* game_field_stroka, int dir) {
     return game_field_stroka;
 }
 
-int** leftORrihgt(int** game_field) {
-    for (int i{ 0 }; i < SIZE; i++) {
+int** move(int** game_field, int dir) {
+    if (dir == LEFT or dir == RIGHT) {
+        for (int i{ 0 }; i < SIZE; i++) {
 
-        game_field[i] = shiftRorL(game_field[i], RIGHT);
-        game_field[i] = mergeRorL(game_field[i], RIGHT);
+            game_field[i] = shiftRorL(game_field[i], dir);
+            game_field[i] = mergeRorL(game_field[i], dir);
+
+        }
+    }
+    else {
+        int* game_field_stolbik = new int [SIZE] {0};
+
+        if (dir == UP) {
+            dir = LEFT;
+        }
+        else {
+            dir = RIGHT;
+        }
+
+        for (int j{ 0 }; j < SIZE; j++) {
+            for (int i{ 0 }; i < SIZE; i++) {
+                game_field_stolbik[i] = game_field[i][j];
+            }
+            game_field_stolbik = shiftRorL(game_field_stolbik, dir);
+            game_field_stolbik = mergeRorL(game_field_stolbik, dir);
+            for (int i{ 0 }; i < SIZE; i++) {
+                game_field[i][j] = game_field_stolbik[i];
+            }
+        }
 
     }
+    game_field = generateCell(game_field);
     return game_field;
 }
 

@@ -2,24 +2,22 @@
 //
 
 
-
 #include <iostream>
 #include "logic.h"
+#include "game_input.h"
 
 int main() {
 	srand(time(NULL));
 
 	int** game_field = creation();
-	printField(game_field);
-	std::cout << "\n";
-	game_field = leftORrihgt(game_field);
-	printField(game_field);
-	std::cout << "\n";
-	/*while (true)
+
+
+	while (true)
 	{
 		printField(game_field);
-		std::cout << "\n";
-	}*/
+		game_field = move(game_field, check_input());
 
+	}
+	
 	return 0;
 }
