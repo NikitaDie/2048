@@ -10,11 +10,16 @@ int main() {
 	srand(time(NULL));
 
 	int** game_field = creation();
-	while (true)
+	printField(game_field);
+	std::cout << "\n";
+	game_field = left(game_field);
+	printField(game_field);
+	std::cout << "\n";
+	/*while (true)
 	{
 		printField(game_field);
 		std::cout << "\n";
-	}
+	}*/
 
 	return 0;
 }
