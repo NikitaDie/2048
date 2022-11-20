@@ -1,5 +1,8 @@
 #pragma once
 
-void printField(int** game_field, const int SIZE);
 
-int** generateCell(int** game_field, const int SIZE);
+int** creation();
+
+void printField(int** game_field);
+
+int** generateCell(int** game_field);
