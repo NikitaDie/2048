@@ -12,7 +12,7 @@ int main() {
 	int** game_field = creation();
 	printField(game_field);
 	std::cout << "\n";
-	game_field = left(game_field);
+	game_field = leftORrihgt(game_field);
 	printField(game_field);
 	std::cout << "\n";
 	/*while (true)
