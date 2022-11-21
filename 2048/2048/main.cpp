@@ -5,12 +5,18 @@
 #include <iostream>
 #include "logic.h"
 #include "game_input.h"
+#include "game_graphic.h"
+
+const int WINDOW_W = 85;
+const int WINDOW_H = 50;
 
 int main() {
 	srand(time(NULL));
 
-	int** game_field = creation();
+	setConsoleSize(WINDOW_W, WINDOW_H);
 
+	int** game_field = creation();
+	std::cout << AsciiArt2048();
 
 	while (true)
 	{
