@@ -6,9 +6,8 @@
 #include "logic.h"
 #include "game_input.h"
 #include "game_graphic.h"
+#include "common.h"
 
-const int WINDOW_W = 85;
-const int WINDOW_H = 50;
 
 int main() {
 	srand(time(NULL));

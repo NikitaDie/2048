@@ -1,7 +1,9 @@
-//#include <iostream>
+
 #include <sstream>
 #include <conio.h>
 #include <windows.h>
+#include "common.h"
+
 
 void setConsoleSize(short w, short h){	
     HANDLE out_handle = GetStdHandle(STD_OUTPUT_HANDLE);
