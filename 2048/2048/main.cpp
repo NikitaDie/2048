@@ -15,14 +15,13 @@ int main() {
 	setConsoleSize(WINDOW_W, WINDOW_H);
 
 	int** game_field = creation();
-	std::cout << AsciiArt2048();
 
 	while (true)
 	{
-		printField(game_field);
+		showScreen(game_field);
 		game_field = move(game_field, check_input());
 
 	}
-	
+
 	return 0;
 }

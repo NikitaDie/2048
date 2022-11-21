@@ -3,4 +3,4 @@
 
 void setConsoleSize(short w, short h);
 
-std::string AsciiArt2048();
+void showScreen(int** game_field);
