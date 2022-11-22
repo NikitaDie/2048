@@ -50,8 +50,7 @@ void AsciiArt2048() { // width 83 (2 space at the beginning), height 11
   )";
 
 	std::ostringstream title_card_richtext;
-	
-	title_card_richtext <<  "\033[" << static_cast<int>(33) << "m" << bold_on << title_card_2048 << bold_off << def;
+	title_card_richtext << STYLE(green) << STYLE(bold_on) << title_card_2048 << STYLE(bold_off) << STYLE(def);
 	std::cout << title_card_richtext.str();
 }
 
@@ -62,7 +61,7 @@ void InputCommandList() {
 		"D or L or → => Right", "Z or P => Save" };
 	std::ostringstream str_os;
 	for (const auto txt : input_commands_list_text) {
-		str_os << sp << txt << "\n";
+		str_os << STYLE(yellow) << sp << txt << STYLE(def) << "\n";
 	}
 	std::cout << str_os.str();
 }
@@ -104,13 +103,17 @@ void printBoard(int** game_field) {
 	}
 
 	int beginning_number_y = (teil_lenght_y - 2) / 2;
+	int i_for_colors{ 0 };
 
 	for (int i{ 0 }; i < SIZE; i++) {
 		for (int j{ 0 }; j < SIZE; j++) {
+			if (game_field[i][j] == 0) continue;
+
 			int beginning_number_x = (teil_lenght_x - checkTheNumberOfDigits(game_field[i][j]) - 1) / 2;
 			GotoXY(beginning_x + beginning_number_x + j * teil_lenght_x + 1, beginning_y + beginning_number_y + i * teil_lenght_y + 1);
-			//setColor(game_field[i][j]);
-			std::cout << game_field[i][j];
+
+			i_for_colors = numbers_color[(int)log2(game_field[i][j]) - 1];
+			std::cout << STYLE(i_for_colors) << game_field[i][j] << STYLE(def);
 		}
 	}
 
