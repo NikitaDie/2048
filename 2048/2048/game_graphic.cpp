@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 #include "common.h"
+#include "styles.h"
 
 
 void setConsoleSize(short w, short h) {
@@ -21,6 +22,12 @@ int checkTheNumberOfDigits(int x) {
 	return n;
 }
 
+void setColor(int x) {
+	const char* n = "color 0"+(char)2;
+	//n += (char)2;
+	system(n);
+}
+
 
 void GotoXY(int X, int Y) {
 	HANDLE  hConsole;
@@ -28,25 +35,6 @@ void GotoXY(int X, int Y) {
 	COORD coord = { X, Y };
 	SetConsoleCursorPosition(hStdOut, coord);
 }
-
-/*std::string AsciiArt2048() { // width 83 (2 space at the beginning), height 11
-	std::string title_card_2048 = R"(
-   /\\\\\\\\\          /\\\\\\\                /\\\         /\\\\\\\\\
-  /\\\///////\\\      /\\\/////\\\            /\\\\\       /\\\///////\\\
-  \///      \//\\\    /\\\    \//\\\         /\\\/\\\      \/\\\     \/\\\
-			 /\\\/    \/\\\     \/\\\       /\\\/\/\\\      \///\\\\\\\\\/
-		   /\\\//      \/\\\     \/\\\     /\\\/  \/\\\       /\\\///////\\\
-		 /\\\//         \/\\\     \/\\\   /\\\\\\\\\\\\\\\\   /\\\      \//\\\
-		/\\\/            \//\\\    /\\\   \///////////\\\//   \//\\\      /\\\
-		/\\\\\\\\\\\\\\\   \///\\\\\\\/              \/\\\      \///\\\\\\\\\/
-		\///////////////      \///////                \///         \/////////
-  )";
-	std::ostringstream title_card_richtext;
-	//title_card_richtext << green << bold_on << title_card_2048 << bold_off << def;
-	title_card_richtext << title_card_2048;
-	//title_card_richtext << "\n\n\n";
-	return title_card_richtext.str();
-}*/
 
 void AsciiArt2048() { // width 83 (2 space at the beginning), height 11
 	std::string title_card_2048 = R"(
@@ -62,9 +50,8 @@ void AsciiArt2048() { // width 83 (2 space at the beginning), height 11
   )";
 
 	std::ostringstream title_card_richtext;
-	//title_card_richtext << green << bold_on << title_card_2048 << bold_off << def;
-	title_card_richtext << title_card_2048;
-
+	
+	title_card_richtext <<  "\033[" << static_cast<int>(33) << "m" << bold_on << title_card_2048 << bold_off << def;
 	std::cout << title_card_richtext.str();
 }
 
@@ -122,6 +109,7 @@ void printBoard(int** game_field) {
 		for (int j{ 0 }; j < SIZE; j++) {
 			int beginning_number_x = (teil_lenght_x - checkTheNumberOfDigits(game_field[i][j]) - 1) / 2;
 			GotoXY(beginning_x + beginning_number_x + j * teil_lenght_x + 1, beginning_y + beginning_number_y + i * teil_lenght_y + 1);
+			//setColor(game_field[i][j]);
 			std::cout << game_field[i][j];
 		}
 	}
