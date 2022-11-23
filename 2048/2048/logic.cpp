@@ -68,10 +68,8 @@ bool IsSchiftRight(int** game_field) {
     for (int i{ 0 }; i < SIZE; ++i) {
         bool cell{ false };
         for (int j{ 0 }; j < SIZE; ++j) {
-            if (game_field[i][j] == 0 && cell) return true;
-            else if (game_field[i][j] != 0 && !cell) {
-                cell = true;
-            }
+            if (game_field[i][j] != 0 && !cell) cell = true;
+            else if (game_field[i][j] == 0 && cell) return true;           
         }
     }
 
@@ -83,10 +81,8 @@ bool IsSchiftLeft(int** game_field) {
     for (int i{ 0 }; i < SIZE; ++i) {
         bool cell{ false };
         for (int j{ SIZE - 1 }; j >= 0; --j) {
-            if (game_field[i][j] == 0 && cell) return true;
-            else if (game_field[i][j] != 0 && !cell) {
-                cell = true;
-            }
+            if (game_field[i][j] != 0 && !cell) cell = true;
+            else if (game_field[i][j] == 0 && cell) return true;
         }
     }
 
@@ -98,10 +94,8 @@ bool IsSchiftDown(int** game_field) {
     for (int i{ 0 }; i < SIZE; ++i) {
         bool cell{ false };
         for (int j{ 0 }; j < SIZE; ++j) {
-            if (game_field[j][i] == 0 && cell) return true;
-            else if (game_field[j][i] != 0 && !cell) {
-                cell = true;
-            }
+            if (game_field[j][i] != 0 && !cell) cell = true;
+            else if (game_field[j][i] == 0 && cell) return true;
         }
     }
 
@@ -113,10 +107,8 @@ bool IsSchiftUp(int** game_field) {
     for (int i{ 0 }; i < SIZE; ++i) {
         bool cell{ false };
         for (int j{ SIZE - 1 }; j >= 0; --j) {
-            if (game_field[j][i] == 0 && cell) return true;
-            else if (game_field[j][i] != 0 && !cell) {
-                cell = true;
-            }
+            if (game_field[j][i] != 0 && !cell) cell = true;
+            else if (game_field[j][i] == 0 && cell) return true;
         }
     }
 
