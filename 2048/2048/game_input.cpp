@@ -16,6 +16,7 @@ int check_input() {
 		return DOWN;
 	case r:
 		return RIGHT;
+
 	case l:
 		return LEFT;
 	

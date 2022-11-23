@@ -18,6 +18,7 @@ int main() {
 
 	while (true)
 	{
+		if (!movesAvailable(game_field)) break;
 		showScreen(game_field);
 		game_field = move(game_field, check_input());
 
