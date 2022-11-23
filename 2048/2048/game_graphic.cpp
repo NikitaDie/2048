@@ -6,9 +6,30 @@
 #include "styles.h"
 #include "game_input.h"
 
-void setConsoleSize(short w, short h) {
+// в заголовочный файл ???
+const int WINDOW_W = 84;
+const int WINDOW_H = 49;
+
+const int TEXT_Y_SIZE = 14;
+
+const float aspect = (float)WINDOW_W / WINDOW_H;
+const float pixelAspect = 11.0f / 24.0f;
+
+const int teil_lenght_y = 6; // the size of board bases on this value
+const int teil_lenght_x = teil_lenght_y / pixelAspect;
+
+const int lenght_y = SIZE * teil_lenght_y + 1;
+const int lenght_x = SIZE * teil_lenght_x + 1;
+
+
+const int beginning_y = TEXT_Y_SIZE;
+const int beginning_x = (WINDOW_W - lenght_x) / 2;
+
+//
+
+void setConsoleSize() {
 	HANDLE out_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD maxWindow = COORD{ w, h };
+	COORD maxWindow = COORD{ WINDOW_W, WINDOW_H };
 	SMALL_RECT srctWindow = { 0, 0, maxWindow.X - 1, maxWindow.Y - 1 };
 	SMALL_RECT minWindow = { 0, 0, 0, 0 };
 	SetConsoleWindowInfo(out_handle, true, &minWindow);
@@ -66,6 +87,19 @@ void InputCommandList() {
 	std::cout << str_os.str();
 }
 
+void printScore(int score) {
+
+	GotoXY((WINDOW_W - beginning_x) - (checkTheNumberOfDigits(score) + 7), beginning_y + lenght_y + 1);
+
+	std::string str_score = "SCORE: ";
+	std::ostringstream score_text;		
+	score_text << STYLE(yellow) << STYLE(bold_on) << str_score << score << STYLE(bold_off) << STYLE(def);
+	 
+	std::cout << score_text.str();
+
+	GotoXY(0, beginning_y + lenght_y + 1);
+}
+
 bool GameOverPrompt() {
 	std::string lose_game_text = "Game over! You lose.";
 	std::string sp = "  ";
@@ -77,19 +111,6 @@ bool GameOverPrompt() {
 }
 
 void printBoard(int** game_field) {
-	float aspect = (float)WINDOW_W / WINDOW_H;
-	float pixelAspect = 11.0f / 24.0f;
-
-	const int teil_lenght_y = 6; // the size of board bases on this value
-	int teil_lenght_x = teil_lenght_y / pixelAspect;
-
-	int lenght_y = SIZE * teil_lenght_y + 1;
-	int lenght_x = SIZE * teil_lenght_x + 1;
-
-
-	int beginning_y = 14; // the name of the game takes 13 symbols height + 2 lines space
-	int beginning_x = (WINDOW_W - lenght_x) / 2;
-
 
 	for (short y{0}; y < SIZE + 1; ++y) {
 		GotoXY(beginning_x, (beginning_y + y * teil_lenght_y));
@@ -130,9 +151,10 @@ void printBoard(int** game_field) {
 	GotoXY(0, beginning_y + lenght_y + 1);
 }
 
-void showScreen(int** game_field) {
+void showScreen(int** game_field, int score) {
 	system("cls");
 	AsciiArt2048();
 	printBoard(game_field);
+	printScore(score);
 	InputCommandList();
 }

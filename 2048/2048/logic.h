@@ -9,3 +9,5 @@ int** move(int** game_field, int dir);
 
 bool movesAvailable(int** game_field);
 
+int returnScore();
+

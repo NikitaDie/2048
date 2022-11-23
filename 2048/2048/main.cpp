@@ -12,7 +12,7 @@
 int main() {
 	srand(time(NULL));
 
-	setConsoleSize(WINDOW_W, WINDOW_H);
+	setConsoleSize();
 
 	int** game_field = creation();
 
@@ -20,7 +20,7 @@ int main() {
 	
 		while (true)
 		{
-			showScreen(game_field);
+			showScreen(game_field, returnScore());
 			if (!movesAvailable(game_field)) break;
 			game_field = move(game_field, check_input());
 

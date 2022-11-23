@@ -7,20 +7,22 @@ enum direct { u = 72,
 	l = 75 };
 
 int check_input() {
-	_getch();
-	switch (_getch())
-	{
-	case u:
-		return UP;
-	case d:
-		return DOWN;
-	case r:
-		return RIGHT;
+	while (true) {
+		_getch();
+		switch (_getch())
+		{
+		case u:
+			return UP;
+		case d:
+			return DOWN;
+		case r:
+			return RIGHT;
 
-	case l:
-		return LEFT;
-	
-	}
+		case l:
+			return LEFT;
+
+		}
+	};
 	
 }
 

@@ -1,6 +1,17 @@
 #include "common.h"
 #include "generation.h"
 
+// вынести в отдельный файл ???
+int score{ 0 };
+
+void incrScore(int new_score) {
+    score += new_score;
+}
+
+int returnScore() {
+    return score;
+}
+
 
 int** creation() {
     int** game_field = new int* [SIZE] {
@@ -27,7 +38,7 @@ int** makeClear(int** game_field){
     game_field = generateCell(game_field);
     game_field = generateCell(game_field);
 
-
+    score = 0;
     return game_field;
 }
 
@@ -175,6 +186,7 @@ int* mergeRorL(int* game_field_stroka, int dir) {
 
                 game_field_stroka[j] *= 2;
                 game_field_stroka[j + 1] = 0;
+                incrScore(game_field_stroka[j]);
                 // может создать функцию
                 for (int k = j + 1; k < SIZE - 1; k++) {
                     game_field_stroka[k] = game_field_stroka[k + 1];
@@ -191,6 +203,7 @@ int* mergeRorL(int* game_field_stroka, int dir) {
 
                 game_field_stroka[j] *= 2;
                 game_field_stroka[j - 1] = 0;
+                incrScore(game_field_stroka[j]);
                 // может создать функцию
                 for (int k = j - 1; k > 0; k--) {
                     game_field_stroka[k] = game_field_stroka[k - 1];
