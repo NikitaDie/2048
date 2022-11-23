@@ -1,4 +1,3 @@
-#include <iostream>
 #include "common.h"
 #include "generation.h"
 
@@ -7,33 +6,35 @@ int** creation() {
     int** game_field = new int* [SIZE] {
     };
 
-    for (int i{0}; i < SIZE; i++) {
+    for (int i{0}; i < SIZE; ++i) {
         game_field[i] = new int[SIZE] {0};
     }
 
     game_field = generateCell(game_field); 
+    game_field = generateCell(game_field);
+    
+    return game_field;
+}
+
+int** makeClear(int** game_field){
+
+    for (int i{ 0 }; i < SIZE; ++i) {
+        for (int j{ 0 }; j < SIZE; ++j) {
+            game_field[i][j] = 0;
+        }
+    }
+
+    game_field = generateCell(game_field);
     game_field = generateCell(game_field);
 
 
     return game_field;
 }
 
-
-void printField(int** game_field) {
-    for (int i{ 0 }; i < SIZE; i++) {
-        for (int j{ 0 }; j < SIZE; j++) {
-            std::cout << game_field[i][j] << " ";
-        }
-        std::cout << "\n";
-    }
-    std::cout << "\n";
-}
-
-
 bool isCellsAvailable(int** game_field) {
 
     for (int i{ 0 }; i < SIZE; ++i) {
-        for (int j{ 0 }; j < SIZE - 1; ++j) {
+        for (int j{ 0 }; j < SIZE; ++j) {
             if (game_field[i][j] == 0) return true;
         }
     }
@@ -117,11 +118,7 @@ bool IsSchiftUp(int** game_field) {
 
 
 bool movesAvailable(int** game_field) {
-    return  tileMatchesAvailableX(game_field) || isCellsAvailable(game_field);
-}
-
-void endOfGame() {
-    std::cout << "MaslovaAIvedGovoril!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    return (tileMatchesAvailableX(game_field) || isCellsAvailable(game_field) || tileMatchesAvailableY(game_field));
 }
 
 bool IsLose(int** game_field) {
@@ -182,7 +179,7 @@ int* mergeRorL(int* game_field_stroka, int dir) {
                 for (int k = j + 1; k < SIZE - 1; k++) {
                     game_field_stroka[k] = game_field_stroka[k + 1];
                 }
-                game_field_stroka[SIZE] = 0;
+                game_field_stroka[SIZE - 1] = 0;
                 //
             }
         }
@@ -198,7 +195,7 @@ int* mergeRorL(int* game_field_stroka, int dir) {
                 for (int k = j - 1; k > 0; k--) {
                     game_field_stroka[k] = game_field_stroka[k - 1];
                 }
-                game_field_stroka[SIZE] = 0;
+                game_field_stroka[0] = 0;
                 //
             }
         }
@@ -242,10 +239,13 @@ int** move(int** game_field, int dir) {
             for (int i{ 0 }; i < SIZE; i++) {
                 game_field_stolbik[i] = game_field[i][j];
             }
+
             game_field_stolbik = shiftRorL(game_field_stolbik, dir);
             game_field_stolbik = mergeRorL(game_field_stolbik, dir);
-            for (int i{ 0 }; i < SIZE; i++) {
+
+            for (int i{0}; i < SIZE; i++) {
                 game_field[i][j] = game_field_stolbik[i];
+                //std::cout << game_field[i][j] << "\n";
             }
         }
 
@@ -254,9 +254,6 @@ int** move(int** game_field, int dir) {
     return game_field;
 }
 
-//void startOfGame() { //дописать
-//
-//}
 
 
 

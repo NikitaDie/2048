@@ -25,5 +25,5 @@ enum Colors {
 
 
 const int numbers_color[11]{
-    light_red, light_gray, light_cyan, light_blue, light_magneta, red, blue, cyan, magneta, yellow, green
+    light_gray, light_red, light_cyan, light_blue, yellow, red, blue, cyan, light_magneta, yellow, green
 };

@@ -16,12 +16,18 @@ int main() {
 
 	int** game_field = creation();
 
-	while (true)
-	{
-		if (!movesAvailable(game_field)) break;
-		showScreen(game_field);
-		game_field = move(game_field, check_input());
+	while (true) {
+	
+		while (true)
+		{
+			showScreen(game_field);
+			if (!movesAvailable(game_field)) break;
+			game_field = move(game_field, check_input());
 
+		}
+		
+		if(!GameOverPrompt()) break;
+		game_field = makeClear(game_field);
 	}
 
 	return 0;

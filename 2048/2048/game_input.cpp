@@ -23,3 +23,21 @@ int check_input() {
 	}
 	
 }
+
+int check_y() {
+	while (true)
+	{
+		switch (_getch())
+		{
+		case 89:
+			return true;
+		case 121:
+			return true;
+		case 78:
+			return false;
+		case 110:
+			return false;
+		}
+	}
+
+}

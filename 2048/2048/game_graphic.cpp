@@ -4,7 +4,7 @@
 #include <windows.h>
 #include "common.h"
 #include "styles.h"
-
+#include "game_input.h"
 
 void setConsoleSize(short w, short h) {
 	HANDLE out_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -55,15 +55,25 @@ void AsciiArt2048() { // width 83 (2 space at the beginning), height 11
 }
 
 void InputCommandList() {
-	constexpr auto sp = "  ";
+	std::string sp = "  ";
 	const auto input_commands_list_text = {
-		"W or K or ↑ => Up", "A or H or ← => Left", "S or J or ↓ => Down",
-		"D or L or → => Right", "Z or P => Save" };
+		"^ => Up", "< => Left", "v => Down",
+		"> => Right", "R_CTRL => Save" };
 	std::ostringstream str_os;
 	for (const auto txt : input_commands_list_text) {
 		str_os << STYLE(yellow) << sp << txt << STYLE(def) << "\n";
 	}
 	std::cout << str_os.str();
+}
+
+bool GameOverPrompt() {
+	std::string lose_game_text = "Game over! You lose.";
+	std::string sp = "  ";
+	std::ostringstream lose_richtext;
+	lose_richtext << "\n" << STYLE(red) << STYLE(bold_on) << sp << lose_game_text << STYLE(def) << STYLE(bold_off) << "\n\n";
+	std::cout << lose_richtext.str();
+	std::cout << "Would you like to restart?  [y/n] ";
+	return check_y();
 }
 
 void printBoard(int** game_field) {
@@ -77,7 +87,7 @@ void printBoard(int** game_field) {
 	int lenght_x = SIZE * teil_lenght_x + 1;
 
 
-	int beginning_y = 15; // the name of the game takes 15 symbols height
+	int beginning_y = 14; // the name of the game takes 13 symbols height + 2 lines space
 	int beginning_x = (WINDOW_W - lenght_x) / 2;
 
 
