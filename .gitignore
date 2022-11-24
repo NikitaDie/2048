@@ -41,7 +41,8 @@
 
 *.rc
 *.aps
+*.txt
 
-Debug
+2048/2048/Debug
 
 .vs
