@@ -8,7 +8,10 @@ enum direct { u = 72,
 
 int check_input() {
 	while (true) {
-		_getch();
+		int gt = _getch();
+		if (gt == 27) return 27;
+		else if (gt == 114) return 114;
+
 		switch (_getch())
 		{
 		case u:
@@ -17,11 +20,11 @@ int check_input() {
 			return DOWN;
 		case r:
 			return RIGHT;
-
 		case l:
 			return LEFT;
-
 		}
+
+		
 	};
 	
 }

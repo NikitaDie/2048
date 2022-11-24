@@ -71,7 +71,7 @@ void AsciiArt2048() { // width 83 (2 space at the beginning), height 11
   )";
 
 	std::ostringstream title_card_richtext;
-	title_card_richtext << STYLE(green) << STYLE(bold_on) << title_card_2048 << STYLE(bold_off) << STYLE(def);
+	title_card_richtext << STYLE(green) << STYLE(bold_on) << title_card_2048 << STYLE(bold_off) << STYLE(def) << "\n\n\n\n";
 	std::cout << title_card_richtext.str();
 }
 
@@ -79,7 +79,7 @@ void InputCommandList() {
 	std::string sp = "  ";
 	const auto input_commands_list_text = {
 		"^ => Up", "< => Left", "v => Down",
-		"> => Right", "R_CTRL => Save" };
+		"> => Right", "Reach 2048, 2 + 2 = 4" };
 	std::ostringstream str_os;
 	for (const auto txt : input_commands_list_text) {
 		str_os << STYLE(yellow) << sp << txt << STYLE(def) << "\n";
@@ -157,4 +157,10 @@ void showScreen(int** game_field, int score) {
 	printBoard(game_field);
 	printScore(score);
 	InputCommandList();
+}
+
+bool showMenu() {
+	AsciiArt2048();
+	std::cout << STYLE(green) << STYLE(bold_on) << "Would you like to continue the game?" << STYLE(red) << " [y / n] " << STYLE(bold_off) << STYLE(def);
+	return check_y();
 }

@@ -6,3 +6,5 @@ void setConsoleSize();
 void showScreen(int** game_field, int score);
 
 bool GameOverPrompt();
+
+bool showMenu();
