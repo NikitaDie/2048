@@ -45,5 +45,11 @@
 *.pdb
 
 2048/2048/Debug
+2048/2048/Debug
+2048/2048/resource.h
+2048/2048/resource1.h
+2048/2048/resource2.h
+
+
 
 .vs
