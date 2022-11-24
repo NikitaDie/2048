@@ -29,7 +29,7 @@
 *.lib
 
 # Executables
-*.exe
+
 *.out
 *.app
 
@@ -39,6 +39,8 @@
 *.out
 *.app
 
+*.rc
+*.aps
 
 Debug
 
